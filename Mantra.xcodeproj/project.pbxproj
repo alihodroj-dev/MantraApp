@@ -8,17 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		192B49AE2C02311700C1BCA8 /* MantraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192B49AD2C02311700C1BCA8 /* MantraApp.swift */; };
-		192B49B02C02311700C1BCA8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192B49AF2C02311700C1BCA8 /* ContentView.swift */; };
 		192B49B22C02311800C1BCA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 192B49B12C02311800C1BCA8 /* Assets.xcassets */; };
 		192B49B52C02311800C1BCA8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 192B49B42C02311800C1BCA8 /* Preview Assets.xcassets */; };
+		192B49BE2C0231AC00C1BCA8 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 192B49BC2C0231AC00C1BCA8 /* Montserrat-Bold.ttf */; };
+		192B49BF2C0231AC00C1BCA8 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 192B49BD2C0231AC00C1BCA8 /* Montserrat-Regular.ttf */; };
+		192B49C32C02335400C1BCA8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192B49C22C02335300C1BCA8 /* MainView.swift */; };
+		192B49C62C0256D300C1BCA8 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192B49C52C0256D300C1BCA8 /* Exercise.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		192B49AA2C02311700C1BCA8 /* Mantra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mantra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		192B49AD2C02311700C1BCA8 /* MantraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MantraApp.swift; sourceTree = "<group>"; };
-		192B49AF2C02311700C1BCA8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		192B49B12C02311800C1BCA8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		192B49B42C02311800C1BCA8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		192B49BC2C0231AC00C1BCA8 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		192B49BD2C0231AC00C1BCA8 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		192B49C02C02328A00C1BCA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		192B49C22C02335300C1BCA8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		192B49C52C0256D300C1BCA8 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +58,11 @@
 		192B49AC2C02311700C1BCA8 /* Mantra */ = {
 			isa = PBXGroup;
 			children = (
+				192B49C02C02328A00C1BCA8 /* Info.plist */,
 				192B49AD2C02311700C1BCA8 /* MantraApp.swift */,
-				192B49AF2C02311700C1BCA8 /* ContentView.swift */,
+				192B49C42C0256B600C1BCA8 /* Model */,
+				192B49C12C02334500C1BCA8 /* Views */,
+				192B49BB2C02313300C1BCA8 /* Font */,
 				192B49B12C02311800C1BCA8 /* Assets.xcassets */,
 				192B49B32C02311800C1BCA8 /* Preview Content */,
 			);
@@ -65,6 +75,31 @@
 				192B49B42C02311800C1BCA8 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		192B49BB2C02313300C1BCA8 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				192B49BC2C0231AC00C1BCA8 /* Montserrat-Bold.ttf */,
+				192B49BD2C0231AC00C1BCA8 /* Montserrat-Regular.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		192B49C12C02334500C1BCA8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				192B49C22C02335300C1BCA8 /* MainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		192B49C42C0256B600C1BCA8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				192B49C52C0256D300C1BCA8 /* Exercise.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,8 +160,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				192B49BF2C0231AC00C1BCA8 /* Montserrat-Regular.ttf in Resources */,
 				192B49B52C02311800C1BCA8 /* Preview Assets.xcassets in Resources */,
 				192B49B22C02311800C1BCA8 /* Assets.xcassets in Resources */,
+				192B49BE2C0231AC00C1BCA8 /* Montserrat-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +174,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				192B49B02C02311700C1BCA8 /* ContentView.swift in Sources */,
 				192B49AE2C02311700C1BCA8 /* MantraApp.swift in Sources */,
+				192B49C32C02335400C1BCA8 /* MainView.swift in Sources */,
+				192B49C62C0256D300C1BCA8 /* Exercise.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,11 +313,15 @@
 				DEVELOPMENT_TEAM = SJRUCMU4G5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Mantra/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Mantra;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,11 +346,15 @@
 				DEVELOPMENT_TEAM = SJRUCMU4G5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Mantra/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Mantra;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
