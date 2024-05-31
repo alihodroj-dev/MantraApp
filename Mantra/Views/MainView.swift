@@ -17,13 +17,13 @@ struct MainView: View {
             repsCountDownValue = currentChosenExercise.reps
         }
     }
-    @State var isDoingExercise: Bool = false
-    @State private var actionButtonValue: String = "START"
+    @State var didStartExercise: Bool = false
+    @State private var actionButtonValue: String = "Tap circle to start"
     @State private var progressCircleSize: CGFloat = 120
     
     // counters
-    @State var forCountdownValue: Int = 4
-    @State var repsCountDownValue: Int = 3
+    @State var forCountdownValue: Int = exercises[0].durationOfInhale
+    @State var repsCountDownValue: Int = exercises[0].reps
     @State var timerCounter = 0
     
     // colors
@@ -38,14 +38,22 @@ struct MainView: View {
             // sub container
             VStack(spacing: 0) {
                 topBar
-                exerciseCircles
+                if(didStartExercise) {
+                    exerciseCircles(widthOfCircles: progressCircleSize)
+                        .transition(.scale)
+                } else {
+                    exerciseCircles(widthOfCircles: 120)
+                        .transition(.scale)
+                }
                 bottomBar
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .onReceive(mainTimer, perform: { _ in
             // check if user started the exercise
-            if(isDoingExercise) { startExercise() }
+            if(didStartExercise) {
+                startExercise()
+            }
         })
     }
     
@@ -59,13 +67,13 @@ struct MainView: View {
                 .foregroundStyle(secondaryColor)
             Spacer()
             // settings button
-            Button {
-                // todo
-            } label: {
-                Image(systemName: "gearshape.fill")
-                    .font(.title2)
-                    .foregroundStyle(secondaryColor)
-            }
+//            Button {
+//                // todo
+//            } label: {
+//                Image(systemName: "gearshape.fill")
+//                    .font(.title2)
+//                    .foregroundStyle(secondaryColor)
+//            }
         }
         .frame(maxWidth: .infinity)
         .padding(.horizontal, 20)
@@ -81,32 +89,25 @@ struct MainView: View {
             // main
             HStack(alignment: .center, spacing: 0) {
                 // action button
-                Button {
-                    if(isDoingExercise) {
-                        isDoingExercise = false
-                    } else {
-                        isDoingExercise = true
-                    }
-                } label: {
-                    ZStack {
-                        secondaryColor
-                            .clipShape(.rect(cornerRadius: 18))
-                        Text(actionButtonValue)
-                            .foregroundStyle(primaryColor)
-                            .font(.custom("Montserrat-Bold", size: 18))
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    }
-                    .padding(7)
+                ZStack {
+                    secondaryColor
+                        .clipShape(.rect(cornerRadius: 18))
+                    Text(actionButtonValue)
+                        .foregroundStyle(primaryColor)
+                        .font(.custom("Montserrat-Bold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .padding()
                 }
+                .padding(7)
                 // text label container
                 HStack(alignment: .center, spacing: 0) {
                     // for label
-                    VStack(alignment: .leading, spacing: 0) {
+                    VStack(alignment: .leading, spacing: 2) {
                         Text("FOR")
-                            .font(.custom("Montserrat-Bold", size: 15))
+                            .font(.custom("Montserrat-Bold", size: 18))
                             .foregroundStyle(secondaryColor)
                         Text("\(forCountdownValue)")
-                            .font(.custom("Montserrat-Regular", size: 14))
+                            .font(.custom("Montserrat-Regular", size: 16))
                             .foregroundStyle(secondaryColor)
                     }
                     .frame(maxWidth: .infinity)
@@ -115,12 +116,12 @@ struct MainView: View {
                         .frame(width: 1)
                         .padding(.vertical, 10)
                     // reps label
-                    VStack(alignment: .leading, spacing: 0) {
+                    VStack(alignment: .leading, spacing: 2) {
                         Text("REPS")
-                            .font(.custom("Montserrat-Bold", size: 15))
+                            .font(.custom("Montserrat-Bold", size: 18))
                             .foregroundStyle(secondaryColor)
                         Text("\(repsCountDownValue)")
-                            .font(.custom("Montserrat-Regular", size: 14))
+                            .font(.custom("Montserrat-Regular", size: 16))
                             .foregroundStyle(secondaryColor)
                     }
                     .frame(maxWidth: .infinity)
@@ -133,23 +134,32 @@ struct MainView: View {
         .padding(.horizontal)
     }
     
-    private var exerciseCircles: some View {
+    @ViewBuilder
+    private func exerciseCircles(widthOfCircles: CGFloat) -> some View {
         ZStack(alignment: .center) {
             Circle()
-                .frame(height: progressCircleSize)
+                .frame(height: widthOfCircles)
                 .foregroundStyle(secondaryColor.opacity(0.1))
                 .shadow(radius: 10)
             Circle()
-                .frame(height: progressCircleSize - 30)
+                .frame(height: widthOfCircles - 30)
                 .foregroundStyle(secondaryColor.opacity(0.2))
                 .shadow(radius: 10)
             Circle()
-                .frame(height: progressCircleSize - 60)
+                .frame(height: widthOfCircles - 60)
                 .foregroundStyle(secondaryColor.opacity(1))
                 .shadow(radius: 10)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(40)
+        .onTapGesture {
+            if(didStartExercise) {
+                withAnimation{ didStartExercise = false }
+                stopExercise()
+            } else {
+                didStartExercise = true
+            }
+        }
     }
     
     // helper methods
@@ -176,7 +186,7 @@ struct MainView: View {
                 performExhaleAnimation()
             }
             // check if finished rep to reset counter
-            if(timerCounter == (currentChosenExercise.durationOfInhale + currentChosenExercise.durationOfHold + currentChosenExercise.durationOfInhale - 1)) {
+            if(timerCounter == (currentChosenExercise.durationOfInhale + currentChosenExercise.durationOfHold + currentChosenExercise.durationOfExhale - 1)) {
                 timerCounter = 0
                 repsCountDownValue -= 1
             }
@@ -191,10 +201,12 @@ struct MainView: View {
     }
     
     private func stopExercise() -> Void {
+        timerCounter = 0
         forCountdownValue = currentChosenExercise.durationOfInhale
         repsCountDownValue = currentChosenExercise.reps
-        actionButtonValue = "START"
-        isDoingExercise = false
+        actionButtonValue = "Tap circle to start"
+        progressCircleSize = 120
+        didStartExercise = false
     }
     
     private func performInhaleAnimation() -> Void {
